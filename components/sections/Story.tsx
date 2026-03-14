@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import GoldenSpiral from "@/components/svg/GoldenSpiral";
 import PiSpiralCanvas from "@/components/canvas/PiSpiralCanvas";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import Image from "next/image";
 import SectionBackground from "@/components/SectionBackground";
 
 const PARA_VARIANTS = {
@@ -194,11 +194,22 @@ export default function Story() {
             justifyContent: "center",
           }}
         >
-          <ImagePlaceholder
-            width={300}
-            height={300}
-            description="Pepe as William Jones at a chalkboard, writing Pi digits. Dark academia aesthetic, mathematical instruments around him."
-          />
+          <div
+            style={{
+              borderRadius: "1rem",
+              overflow: "hidden",
+              border: "1px solid rgba(212, 168, 67, 0.2)",
+              boxShadow: "0 0 40px rgba(212, 168, 67, 0.08), 0 8px 32px rgba(0, 0, 0, 0.4)",
+            }}
+          >
+            <Image
+              src="/images/pepe.png"
+              alt="Pepe the Frog as William Jones, mathematician who introduced the π symbol"
+              width={340}
+              height={340}
+              style={{ display: "block", objectFit: "cover" }}
+            />
+          </div>
         </motion.div>
       </div>
     </section>
