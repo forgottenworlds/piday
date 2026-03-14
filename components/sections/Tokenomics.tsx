@@ -2,11 +2,10 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import GeometricShape from "@/components/svg/GeometricShape";
+
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 interface StatItem {
-  shape: "circle" | "triangle" | "hexagon";
   emoji: string;
   value: string;
   label: string;
@@ -16,7 +15,7 @@ interface StatItem {
 
 const STATS: StatItem[] = [
   {
-    shape: "circle",
+
     emoji: "🥧",
     value: PLACEHOLDERS.tokenomics.totalSupply,
     label: "Total Supply",
@@ -24,7 +23,7 @@ const STATS: StatItem[] = [
     delay: 0,
   },
   {
-    shape: "triangle",
+
     emoji: "🔥",
     value: PLACEHOLDERS.tokenomics.burnRate,
     label: "Burn Rate",
@@ -32,7 +31,7 @@ const STATS: StatItem[] = [
     delay: 0.3,
   },
   {
-    shape: "hexagon",
+
     emoji: "🔒",
     value: PLACEHOLDERS.tokenomics.lpLock,
     label: "LP Lock",
@@ -53,7 +52,7 @@ function StatCard({ stat }: { stat: StatItem }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "0",
+        gap: "0.5rem",
         flex: "1 1 200px",
         minWidth: 0,
         background: "rgba(15, 22, 41, 0.6)",
@@ -61,65 +60,52 @@ function StatCard({ stat }: { stat: StatItem }) {
         WebkitBackdropFilter: "blur(12px)",
         border: "1px solid rgba(212, 168, 67, 0.15)",
         borderRadius: "1rem",
-        padding: "1.5rem 2rem",
+        padding: "2rem",
       }}
     >
       {/* Emoji icon */}
-      <span style={{ fontSize: "3.5rem", lineHeight: 1, marginBottom: "-0.75rem" }} aria-hidden="true">
+      <span style={{ fontSize: "3.5rem", lineHeight: 1 }} aria-hidden="true">
         {stat.emoji}
       </span>
 
-      {/* Shape with text overlay */}
-      <div style={{ position: "relative", width: 200, height: 200 }}>
-        <GeometricShape shape={stat.shape} size={200} />
-        {/* Centered text overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0.25rem",
-            padding: "1rem",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: "1.25rem",
-              fontWeight: 700,
-              color: "var(--color-gold)",
-              textAlign: "center",
-              lineHeight: 1.2,
-            }}
-          >
-            {stat.value}
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-inter), sans-serif",
-              fontSize: "0.875rem",
-              color: "var(--color-muted)",
-              textAlign: "center",
-            }}
-          >
-            {stat.label}
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-inter), sans-serif",
-              fontSize: "0.75rem",
-              color: "var(--color-muted)",
-              textAlign: "center",
-              opacity: 0.7,
-            }}
-          >
-            {stat.subLabel}
-          </span>
-        </div>
-      </div>
+      {/* Value */}
+      <span
+        style={{
+          fontFamily: "var(--font-jetbrains-mono), monospace",
+          fontSize: "1.5rem",
+          fontWeight: 700,
+          color: "var(--color-gold)",
+          textAlign: "center",
+          lineHeight: 1.2,
+        }}
+      >
+        {stat.value}
+      </span>
+
+      {/* Label */}
+      <span
+        style={{
+          fontFamily: "var(--font-inter), sans-serif",
+          fontSize: "0.875rem",
+          color: "var(--color-muted)",
+          textAlign: "center",
+        }}
+      >
+        {stat.label}
+      </span>
+
+      {/* Sub-label */}
+      <span
+        style={{
+          fontFamily: "var(--font-inter), sans-serif",
+          fontSize: "0.75rem",
+          color: "var(--color-muted)",
+          textAlign: "center",
+          opacity: 0.7,
+        }}
+      >
+        {stat.subLabel}
+      </span>
     </motion.div>
   );
 }
