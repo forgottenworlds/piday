@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# $PIDAY
+
+**Infinite. Irrational. Unstoppable.**
+
+The only meme coin with a built-in global holiday. Born on Pi Day 2026 on Solana.
+
+## About
+
+$PIDAY is a Solana meme coin themed around the mathematical constant Pi (π) and its annual celebration on March 14 (Pi Day). The project pays homage to William Jones, the Welsh mathematician who introduced the π symbol in 1706 — reimagined as a Pepe.
+
+- **Total Supply:** 3,141,592,653 (the digits of π)
+- **Burn Rate:** 3.14% per transaction
+- **LP Lock:** 314 days
+- **No team tokens. No presale. No insider allocation. 100% fair launch.**
+
+## Website
+
+**piday.online** — a scroll-driven, sacred-mathematics-themed landing page featuring Matrix-style Pi digit rain, animated sacred geometry, and glassmorphism UI.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **UI:** React 19, Tailwind CSS v4, shadcn
+- **Animations:** GSAP (ScrollTrigger), Framer Motion, Canvas 2D
+- **Fonts:** Space Grotesk, Inter, JetBrains Mono
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/              — Next.js App Router (layout, page, globals.css)
+components/
+  sections/       — 7 page sections (Hero, Tokenomics, Story, HowToBuy, Community, Footer)
+  ui/             — Shared components (BuyButton, ContractAddressBar, Toast, SocialIcon)
+  canvas/         — Canvas backgrounds (PiDigitRings, PiSpiralCanvas)
+  svg/            — SVG primitives (SacredGeometryIntro, GoldenSpiral, etc.)
+hooks/            — React hooks (useReducedMotion, useCopyToClipboard, useCountUp)
+lib/              — Shared data (pi-digits, placeholders, fonts)
+public/images/    — Logo, OG card, favicons, Pepe portrait
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Links
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Website:** piday.online
+- **X/Twitter:** @PiDayCoin
 
-## Deploy on Vercel
+## Disclaimer
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+$PIDAY is a meme coin with no intrinsic value. This is not financial advice.
