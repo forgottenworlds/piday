@@ -5,6 +5,7 @@ import { Wallet, ClipboardCopy, ArrowRightLeft } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ContractAddressBar } from "@/components/ui/ContractAddressBar";
 import { BuyButton } from "@/components/ui/BuyButton";
+import SectionBackground from "@/components/SectionBackground";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 interface Step {
@@ -106,6 +107,7 @@ export function HowToBuy() {
         background: "var(--color-surface)",
       }}
     >
+      <SectionBackground color="gold" />
       <div
         style={{
           maxWidth: "1200px",

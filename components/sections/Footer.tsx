@@ -16,7 +16,7 @@ export function Footer() {
         paddingTop: "12.5rem",
         paddingBottom: "5rem",
         position: "relative",
-        background: "var(--color-bg)",
+        background: "#111827",
       }}
     >
       <div

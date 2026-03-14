@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import SectionBackground from "@/components/SectionBackground";
 
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
@@ -121,6 +122,8 @@ export default function Tokenomics() {
         background: "var(--color-surface)",
       }}
     >
+      <SectionBackground color="gold" />
+
       {/* Ambient construction lines */}
       <svg
         aria-hidden="true"

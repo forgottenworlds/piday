@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import GoldenSpiral from "@/components/svg/GoldenSpiral";
 import PiSpiralCanvas from "@/components/canvas/PiSpiralCanvas";
 import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import SectionBackground from "@/components/SectionBackground";
 
 const PARA_VARIANTS = {
   hidden: { opacity: 0, y: 20 },
@@ -25,6 +26,8 @@ export default function Story() {
         background: "var(--color-bg)",
       }}
     >
+      <SectionBackground color="cyan" />
+
       {/* Background Pi spiral canvas — mobile */}
       <div
         className="absolute inset-0 w-full h-full block md:hidden"

@@ -1,6 +1,7 @@
 import PiDigitTicker from "@/components/PiDigitTicker";
 import PiDigitRings from "@/components/canvas/PiDigitRings";
 import BackgroundEffects from "@/components/BackgroundEffects";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import Tokenomics from "@/components/sections/Tokenomics";
 import Story from "@/components/sections/Story";
@@ -39,6 +40,7 @@ function SectionDivider() {
 export default function Home() {
   return (
     <>
+      <Navbar />
       <PiDigitRings />
       <BackgroundEffects />
       <PiDigitTicker />

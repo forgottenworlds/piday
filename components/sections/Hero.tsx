@@ -13,6 +13,7 @@ import {
   DexScreenerIcon,
 } from "@/components/ui/SocialIcon";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import HeroBackground from "@/components/HeroBackground";
 
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PLACEHOLDERS } from "@/lib/placeholders";
@@ -41,6 +42,8 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
+      <HeroBackground />
+
       {/* Logo — always rendered, starts centered, animates to top on intro complete */}
       <motion.div
         initial={false}

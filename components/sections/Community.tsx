@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import DigitBorder from "@/components/svg/DigitBorder";
 import { XIcon, TelegramIcon } from "@/components/ui/SocialIcon";
+import SectionBackground from "@/components/SectionBackground";
 
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
@@ -147,6 +148,7 @@ export function Community() {
         background: "var(--color-bg)",
       }}
     >
+      <SectionBackground color="cyan" />
       <style>{`
         .gateway-card {
           transition: background 0.3s ease;
