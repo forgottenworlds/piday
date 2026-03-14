@@ -42,7 +42,7 @@ The aesthetic is dark, precise, and ancient-feeling, but unmistakably crypto. Th
 |-------------------|----------------|------------|-------------------------------|
 | Display / Hero    | Space Grotesk  | 700 (Bold) | 72-80px desktop / 40-48px mobile |
 | Headings          | Space Grotesk  | 600 (Semi) | 28-36px                       |
-| Section Titles    | Space Grotesk  | 700 (Bold) | 120px+ (Story heading)        |
+| Story Heading     | Space Grotesk  | 700 (Bold) | 120px+ (Section C only)       |
 | Body              | Inter          | 400        | 16-18px                       |
 | Monospace / Data  | JetBrains Mono | 500        | 14-18px                       |
 | Stats Numbers     | JetBrains Mono | 500        | 32px                          |
@@ -61,6 +61,26 @@ All fonts loaded via `next/font/google` for optimal loading.
 
 **No performance constraints.** Animations are the product. Go heavy.
 
+### 2.4 Animation Ownership Rules
+
+- **GSAP** owns all scroll-driven animations (ScrollTrigger-bound section entrances, transitions, pinned sequences). No other library animates in response to scroll.
+- **Framer Motion** is used only for non-scroll component transitions: toast entrance/exit, modal open/close, component mount/unmount animations.
+- **CSS animations** handle persistent ambient loops: digit ring rotations, ticker scroll, pulse effects, CTA glow.
+- **SVG stroke animation** (via GSAP or CSS) handles all line-drawing effects.
+- No element should be animated by both GSAP and Framer Motion simultaneously.
+
+### 2.5 Accessibility
+
+**Reduced motion:** When `prefers-reduced-motion: reduce` is active:
+- Disable continuous rotations (digit rings, ticker, portal digit-ring)
+- Replace scroll-driven construction animations with simple fade-in reveals (opacity 0→1, 0.3s ease)
+- Disable the traveling light dot on the How to Buy section
+- Core content and layout remain identical
+
+**Focus states:** All interactive elements receive a visible focus ring (2px Pi Gold outline, 2px offset) when focused via keyboard. Focus ring is suppressed for mouse/touch interactions (`:focus-visible` only).
+
+**External links:** All outbound links use `target="_blank"` with `rel="noopener noreferrer"`.
+
 ---
 
 ## 3. Persistent Background Layer
@@ -74,9 +94,20 @@ A full-page `<canvas>` element renders concentric rings of Pi's decimal digits (
 
 This canvas sits behind all content with `position: fixed` and `z-index: 0`.
 
+**Mobile escape hatch:** If canvas digit rings drop below 30fps on mobile, reduce ring count and digit density rather than disabling.
+
 ---
 
 ## 4. Section Designs
+
+### Scroll Transition Conventions
+
+All scroll transitions follow these defaults unless overridden per-section:
+- **Trigger:** Transition begins when the outgoing section is 80% scrolled past (ScrollTrigger `start: "80% center"`)
+- **Scroll distance:** Each transition completes over 300px of scroll
+- **Easing:** `power2.inOut` for positional movement, `power1.out` for opacity
+- **Element movement:** Elements drift along randomized radial paths with ease-out — no physics simulation
+- **Overlap:** Outgoing elements begin exiting while incoming elements begin entering (50% overlap within the 300px scroll window)
 
 ### 4.1 Section A — Hero (First Viewport)
 
@@ -87,18 +118,18 @@ This canvas sits behind all content with `position: fixed` and `z-index: 0`.
 1. Black void. A single golden dot appears at dead center
 2. The dot traces a circle (SVG stroke animation, ~1s). Circle completes
 3. From the circle, thin golden lines extend — constructing sacred geometry fragments (vesica piscis arcs, flower of life hints). SVG stroke-dasharray animation
-4. The geometry lines converge inward, forming the circular crest shape of the logo
-5. The full $PIDAY logo (Pepe-as-William-Jones crest) materializes at center, emerging from within the constructed geometry. Scale from ~80% to 100% with a subtle gold glow bloom
+4. The geometry lines converge inward, forming the circular crest shape of the logo. **Technical approach:** The developer traces ~6-8 key contour paths from the logo PNG (outer badge circle, inner shield shape, main π strokes) as simplified SVG paths. These are used for the stroke construction animation only — they don't need to be a perfect trace, just enough to evoke the shape
+5. The construction completes → crossfade (0.3s) to the actual `logo.png` raster image at center. Scale from ~80% to 100% with a subtle gold glow bloom (box-shadow: `0 0 60px rgba(212, 168, 67, 0.3)`)
 6. Headline text materializes beneath: **"Infinite."** *(beat)* **"Irrational."** *(beat)* **"Unstoppable."** — each word staggered ~0.3s. Space Grotesk 700, 72-80px, white with faint warm gold text-shadow
 7. Remaining hero elements fade up
 
 #### Hero Content (after animation settles)
 
-- **Pi Digit Inscription Strip** — Top of viewport. 24px height. Pi digits in JetBrains Mono, muted gold at ~0.15 opacity, scrolling left continuously. Styled as ancient inscription, not stock ticker. Pauses on hover
+- **Pi Digit Inscription Strip** — Top of viewport. 24px height. Pi digits in JetBrains Mono, muted gold at ~0.15 opacity, scrolling left at ~40px/second. Styled as ancient inscription, not stock ticker. Pauses on hover
 - **Logo + "$PIDAY"** — The logo shrinks to ~64px, settles top-center. "$PIDAY" in Space Grotesk 700 beside it. Below: "piday.online" in muted slate
 - **Headline** — "Infinite. Irrational. Unstoppable." stays prominent
 - **Subheadline** — "The only coin with a built-in global holiday. Born on Pi Day 2026." Inter 20px, muted slate
-- **Contract Address Bar** — Thin gold-bordered pill. CA in JetBrains Mono. Hover: border brightens. Click: copies to clipboard. Toast: "Copied! Now go ape. π" — bottom-right, gold checkmark, 2s duration
+- **Contract Address Bar** — Thin gold-bordered pill. CA in JetBrains Mono. Show first 6 and last 4 characters on mobile (e.g., `PIDAY1...X4K9`), full address on desktop. Hover: border brightens. Click: copies to clipboard via `navigator.clipboard.writeText()`. Fallback: if clipboard API unavailable, select the text and show toast "Couldn't copy — select and copy manually." Success toast: "Copied! Now go ape. π" — Deep Navy background, thin gold border, Inter 14px, gold checkmark icon, bottom-right, fades in 0.3s / out 0.3s, 2s visible duration, z-index above all content
 - **Primary CTA** — "Buy $PIDAY" pill button. Pi Blue fill with radial gradient (slightly lighter at center — light trapped under glass). Hover: inner light intensifies + thin gold ring ripple expands outward from button edge
 - **Social Links Row** — DexScreener, X, Telegram. Small circular icons with thin gold borders. Hover: border fills gold, icon goes white
 - **Scroll Indicator** — Thin golden line descending from center, ending in a small circle (plumb line). Subtle bob animation. Fades at 100px scroll offset
@@ -163,7 +194,7 @@ Left-aligned prose block, max-width ~680px, centered on page. Generous whitespac
 
 #### The Heading
 
-"Why Pi?" at 120px+ Space Grotesk Bold. **The question mark is a golden spiral** — Fibonacci/Archimedes spiral drawn with SVG path animation as it enters view (~1s, thin gold stroke). Replaces the standard glyph.
+"Why Pi?" at 120px+ Space Grotesk Bold. **The question mark is a golden spiral** — Archimedean spiral, approximately 2.5 turns, sized to match the x-height of the heading (~120px), with a small gold dot beneath acting as the question mark's period. Drawn with SVG path animation as it enters view (~1s, thin gold stroke).
 
 #### Content — Three Paragraphs
 
@@ -180,7 +211,7 @@ Each fades in sequentially on scroll with a subtle 20px upward drift. Key phrase
 
 #### Right-Side Ambient Element
 
-A large-scale visualization on the right side (behind text at low opacity on mobile): **digits of Pi arranged in an expanding Archimedean spiral**. Starts tight at center, slowly unwinds outward. Gold digits at ~0.06 opacity. Continuously expanding as user reads. Visual representation of infinity.
+A large-scale visualization on the right side of the viewport (behind text at low opacity on mobile): **digits of Pi arranged in an expanding Archimedean spiral**. Rendered on a secondary canvas element, ~500px wide on desktop, positioned right-aligned with 50% overlap behind the text block. Starts tight at center (radius ~20px), expands outward at ~2px per second. Gold digits (JetBrains Mono, 10px) at ~0.06 opacity. Continuously expanding as user reads. Visual representation of infinity. On mobile, this canvas is full-width behind the text at ~0.04 opacity.
 
 #### Scroll Transition → Market Data
 
@@ -198,7 +229,7 @@ The spiral accelerates its expansion, filling the viewport with a wash of faint 
 
 #### Layout
 
-A wide cinematic panel, full content width. Dark surface background. Single thin gold border with **sacred geometry corner ornaments** — small circular/angular SVG constructions at each corner, drawn with stroke animation on entrance. Like the decorative corners of an ancient astronomical chart.
+A wide cinematic panel, full content width. Dark surface background. Single thin gold border with **sacred geometry corner ornaments** at each corner: a quarter-circle arc (radius ~24px) with two intersecting straight lines forming a 60-degree angle, creating a compass-and-straightedge construction mark. All in gold stroke, drawn with SVG stroke animation on entrance. Like the decorative corners of an ancient astronomical chart.
 
 #### Stats Row
 
@@ -352,11 +383,21 @@ No back-to-top button. No sitemap. No clutter. The page ends with a whisper.
 
 ## 6. SEO & Social Meta
 
+**`<head>` metadata:**
+- `<title>` — "$PIDAY — The Infinite Meme Coin | piday.online"
+- `<meta name="description">` — "Born on Pi Day. 3.14B supply. 3.14% burn. The only coin with a global holiday."
+- `<meta name="theme-color" content="#0A0E1A">`
+- `<link rel="canonical" href="https://piday.online">`
 - `og:title` — "$PIDAY — The Infinite Meme Coin | piday.online"
 - `og:description` — "Born on Pi Day. 3.14B supply. 3.14% burn. The only coin with a global holiday."
 - `og:image` — `/images/og_card.png` (1200x630, pre-rendered)
+- `og:url` — "https://piday.online"
 - `twitter:card` — `summary_large_image`
 - Favicon set in `/images/favicon_io/`
+
+**Note:** Update `site.webmanifest` — change `theme_color` and `background_color` from `#ffffff` to `#0A0E1A`. Update icon paths to `/images/favicon_io/`.
+
+**Pre-hydration state:** Before JS hydration, the page shows a static centered logo on void black background (server-rendered HTML/CSS). The construction animation begins on hydration. This ensures no blank screen on slow connections.
 
 ---
 
@@ -402,6 +443,7 @@ All other visual elements (sacred geometry, digit rings, constructions, connecti
 | X/Twitter URL    | `#` → X profile URL                       |
 | Telegram URL     | `#` → TG invite link                      |
 | DexScreener URL  | `#` → DexScreener pair URL                |
+| Pump.fun URL     | `#` → Pump.fun token page URL              |
 | Price            | `$0.000314`                                |
 | Market Cap       | `$985.2K`                                  |
 | Holders          | `1,592`                                    |
@@ -416,5 +458,7 @@ All other visual elements (sacred geometry, digit rings, constructions, connecti
 | `gsap`             | ScrollTrigger, timeline animations |
 | `framer-motion`    | React component animations         |
 | `next/font/google` | Font loading (built into Next.js)  |
+
+**GSAP licensing:** GSAP free tier applies (no-charge public site). Confirm license compatibility before launch.
 
 No Three.js. No heavy 3D libraries. The wow comes from SVG, Canvas, and choreography.
