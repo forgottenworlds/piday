@@ -24,9 +24,9 @@ export default function HeroBackground() {
     let colCount = 0;
 
     const FONT_SIZE = 16;
-    const CHAR_OPACITY_MAX = 0.15;
-    const FADE_SPEED = 0.03;
-    const DROP_SPEED = 0.15; // cells per frame
+    const CHAR_OPACITY_MAX = 0.08;
+    const FADE_SPEED = 0.015;
+    const DROP_SPEED = 0.06; // cells per frame
 
     function resize() {
       canvas!.width = canvas!.offsetWidth;
@@ -65,7 +65,7 @@ export default function HeroBackground() {
           ctx!.fillText(char, i * FONT_SIZE + FONT_SIZE / 2, headY);
 
           // Slightly brighter leading char
-          ctx!.fillStyle = `rgba(232, 198, 107, ${CHAR_OPACITY_MAX + 0.08})`;
+          ctx!.fillStyle = `rgba(232, 198, 107, ${CHAR_OPACITY_MAX + 0.04})`;
           ctx!.fillText(char, i * FONT_SIZE + FONT_SIZE / 2, headY);
         }
 
@@ -112,7 +112,7 @@ export default function HeroBackground() {
           inset: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.5,
+          opacity: 0.35,
         }}
       />
 
