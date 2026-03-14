@@ -168,7 +168,7 @@ export function HowToBuy() {
             }}
           >
             <ContractAddressBar address={PLACEHOLDERS.contractAddress} />
-            <BuyButton href={PLACEHOLDERS.buyUrl}>Buy $PIDAY</BuyButton>
+            <BuyButton href={PLACEHOLDERS.buyUrl}>Coming Soon</BuyButton>
           </div>
         </motion.div>
       </div>

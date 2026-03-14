@@ -1,9 +1,9 @@
 export const PLACEHOLDERS = {
-  contractAddress: "PIDAY1x7kP9mN3rQ2vS8tW5yB4cF6hJ0dL2nR4kX4K9",
+  contractAddress: "Coming Soon",
   buyUrl: "#",
-  xHandle: "@PiDayCoin",
-  xUrl: "#",
-  telegramUrl: "#",
+  xHandle: "@pidayonline",
+  xUrl: "https://x.com/pidayonline",
+  telegramUrl: "https://t.me/+QGPtIX4rkAEyNDBl",
   dexScreenerUrl: "#",
   pumpFunUrl: "#",
   stats: {

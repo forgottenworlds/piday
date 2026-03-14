@@ -222,7 +222,7 @@ export function Community() {
                 <XIcon />
               </div>
             }
-            heading="Follow @PiDayCoin"
+            heading="Follow @pidayonline"
             body="Get memes. Get alpha. Get irrational."
             ctaLabel="Enter"
           />
