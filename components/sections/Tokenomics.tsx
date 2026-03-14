@@ -65,7 +65,7 @@ function StatCard({ stat }: { stat: StatItem }) {
       }}
     >
       {/* Emoji icon */}
-      <span style={{ fontSize: "3.5rem", lineHeight: 1, marginBottom: "0" }} aria-hidden="true">
+      <span style={{ fontSize: "3.5rem", lineHeight: 1, marginBottom: "-0.75rem" }} aria-hidden="true">
         {stat.emoji}
       </span>
 
