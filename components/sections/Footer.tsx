@@ -45,10 +45,11 @@ export function Footer() {
           style={{
             fontFamily: "var(--font-space-grotesk), sans-serif",
             fontWeight: 600,
-            fontSize: "1.75rem",
+            fontSize: "clamp(1.25rem, 4vw, 1.75rem)",
             color: "#E8EDF5",
             margin: 0,
             lineHeight: 1.2,
+            textAlign: "center",
           }}
         >
           Born on Pi Day 2026. Dies never.

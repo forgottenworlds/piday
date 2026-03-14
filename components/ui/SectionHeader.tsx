@@ -16,7 +16,7 @@ export function SectionHeader({ children, className = "" }: SectionHeaderProps) 
       style={{
         fontFamily: "var(--font-space-grotesk), sans-serif",
         fontWeight: 600,
-        fontSize: "2.25rem", // 36px
+        fontSize: "clamp(1.5rem, 5vw, 2.25rem)",
         lineHeight: 1.2,
         textAlign: "center",
         color: "var(--color-text)",

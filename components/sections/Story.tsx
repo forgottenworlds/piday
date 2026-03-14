@@ -89,7 +89,7 @@ export default function Story() {
               style={{
                 fontFamily: "var(--font-space-grotesk), sans-serif",
                 fontWeight: 700,
-                fontSize: "clamp(5rem, 10vw, 7.5rem)",
+                fontSize: "clamp(3.5rem, 10vw, 7.5rem)",
                 lineHeight: 1,
                 color: "var(--color-text)",
                 margin: 0,

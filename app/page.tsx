@@ -7,6 +7,7 @@ import { MarketData } from "@/components/sections/MarketData";
 import { HowToBuy } from "@/components/sections/HowToBuy";
 import { Community } from "@/components/sections/Community";
 import { Footer } from "@/components/sections/Footer";
+import ScrollOrchestrator from "@/components/ScrollOrchestrator";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
         <Community />
         <Footer />
       </main>
-      {/* ScrollOrchestrator added in Task 22 */}
+      <ScrollOrchestrator />
     </>
   );
 }

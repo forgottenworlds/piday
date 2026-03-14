@@ -10,10 +10,8 @@ interface SacredGeometryIntroProps {
 
 // Approximate path lengths for dasharray/dashoffset initial state
 const CIRCLE_OUTER_LEN = Math.ceil(2 * Math.PI * 90);   // r=90  ≈ 566
-const CIRCLE_INNER_LEN = Math.ceil(2 * Math.PI * 60);   // r=60  ≈ 377
 
-// Sacred geometry arc/line lengths (approximate)
-const ARC_LEN = 180;
+// Sacred geometry line length (approximate)
 const LINE_LEN = 120;
 
 // Logo contour path lengths (approximate)

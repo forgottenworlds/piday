@@ -10,10 +10,6 @@ interface GeometricShapeProps {
   className?: string;
 }
 
-interface ShapeInfo {
-  totalLength: number;
-}
-
 function ShapeElement({
   shape,
   cx,

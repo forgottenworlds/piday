@@ -155,11 +155,12 @@ export function MarketData() {
                 <span
                   style={{
                     fontFamily: "var(--font-jetbrains-mono), monospace",
-                    fontSize: "2rem",
+                    fontSize: "clamp(1.25rem, 4vw, 2rem)",
                     fontWeight: 700,
                     color: "var(--color-gold)",
                     textAlign: "center",
                     lineHeight: 1.1,
+                    wordBreak: "break-all",
                   }}
                 >
                   {stat.value}

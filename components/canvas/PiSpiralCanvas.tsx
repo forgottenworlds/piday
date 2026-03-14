@@ -16,6 +16,7 @@ export default function PiSpiralCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reducedMotion = useReducedMotion();
   const opacityRef = useRef(opacity);
+  // eslint-disable-next-line react-hooks/refs
   opacityRef.current = opacity;
 
   useEffect(() => {
@@ -96,7 +97,6 @@ export default function PiSpiralCanvas({
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reducedMotion]);
 
   return (

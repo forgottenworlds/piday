@@ -216,8 +216,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 1.6 }}
+              className="w-full flex justify-center px-4 sm:w-auto sm:px-0"
             >
-              <BuyButton href={PLACEHOLDERS.buyUrl}>Buy $PIDAY</BuyButton>
+              <BuyButton href={PLACEHOLDERS.buyUrl} className="w-full sm:w-auto">Buy $PIDAY</BuyButton>
             </motion.div>
 
             {/* Social icons */}

@@ -204,6 +204,7 @@ export function Community() {
           }}
         >
           {/* X Gateway */}
+          <div data-animate-gateway style={{ flex: "1 1 0", minWidth: 0, maxWidth: "500px" }}>
           <GatewayCard
             href={PLACEHOLDERS.xUrl}
             delay={0}
@@ -216,6 +217,7 @@ export function Community() {
             body="Get memes. Get alpha. Get irrational."
             ctaLabel="Enter"
           />
+          </div>
 
           {/* Vertical divider (desktop) / horizontal divider (mobile) */}
           <div
@@ -301,6 +303,7 @@ export function Community() {
           </div>
 
           {/* Telegram Gateway */}
+          <div data-animate-gateway style={{ flex: "1 1 0", minWidth: 0, maxWidth: "500px" }}>
           <GatewayCard
             href={PLACEHOLDERS.telegramUrl}
             delay={0.15}
@@ -320,6 +323,7 @@ export function Community() {
             }
             ctaLabel="Enter"
           />
+          </div>
         </div>
       </div>
     </section>

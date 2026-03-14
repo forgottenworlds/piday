@@ -48,10 +48,14 @@ export default function PiDigitRings({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reducedMotion = useReducedMotion();
 
-  // Stable refs so the animation loop always reads latest props
+  // Stable refs so the animation loop always reads latest props without
+  // re-running the effect. Updated synchronously during render so the canvas
+  // draw loop always sees the current value.
   const scrollProgressRef = useRef(scrollProgress);
   const convergenceRef = useRef(convergence);
+  // eslint-disable-next-line react-hooks/refs
   scrollProgressRef.current = scrollProgress;
+  // eslint-disable-next-line react-hooks/refs
   convergenceRef.current = convergence;
 
   useEffect(() => {
@@ -188,7 +192,6 @@ export default function PiDigitRings({
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reducedMotion]);
 
   return (
