@@ -103,38 +103,6 @@ export default function ScrollOrchestrator() {
       });
 
       // ================================================================
-      // SECTION D — Market Data
-      // Corner ornament stroke-draw
-      // ================================================================
-      const marketSection = document.querySelector(
-        '[data-section="market-data"]'
-      );
-      if (marketSection) {
-        const cornerStrokes = gsap.utils.toArray<SVGGeometryElement>(
-          '[data-section="market-data"] path[stroke-dashoffset], [data-section="market-data"] line[stroke-dashoffset]'
-        );
-
-        cornerStrokes.forEach((el, i) => {
-          const dasharray = el.getAttribute("strokeDasharray");
-          if (!dasharray) return;
-          const totalLength = parseFloat(dasharray);
-          gsap.set(el, { strokeDashoffset: totalLength });
-
-          gsap.to(el, {
-            strokeDashoffset: 0,
-            duration: 0.8,
-            ease: "power1.out",
-            delay: i * 0.08,
-            scrollTrigger: {
-              trigger: marketSection,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          });
-        });
-      }
-
-      // ================================================================
       // SECTION E — How to Buy
       // RomanNumeral stroke-draw + ConnectingLine stroke (if applicable)
       // ================================================================

@@ -118,7 +118,7 @@ export default function PiDigitRings({
 
         ctx.save();
         ctx.font = `${ring.fontSize}px "JetBrains Mono", monospace`;
-        ctx.fillStyle = "rgba(212, 168, 67, 0.04)";
+        ctx.fillStyle = "rgba(212, 168, 67, 0.07)";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
@@ -158,7 +158,7 @@ export default function PiDigitRings({
           const digitCount = Math.max(1, Math.floor(circumference / charSpacing));
           ctx.save();
           ctx.font = `${ring.fontSize}px "JetBrains Mono", monospace`;
-          ctx.fillStyle = "rgba(212, 168, 67, 0.04)";
+          ctx.fillStyle = "rgba(212, 168, 67, 0.07)";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           for (let j = 0; j < digitCount; j++) {

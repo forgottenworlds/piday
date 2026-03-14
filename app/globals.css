@@ -99,13 +99,13 @@ body {
 /* Pulse glow — CTA button ambient glow pulse */
 @keyframes pulse-glow {
   0% {
-    box-shadow: 0 0 20px rgba(26, 60, 230, 0.3), 0 0 40px rgba(26, 60, 230, 0.1);
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.3), 0 0 40px rgba(212, 168, 67, 0.1);
   }
   50% {
-    box-shadow: 0 0 30px rgba(26, 60, 230, 0.5), 0 0 60px rgba(26, 60, 230, 0.2);
+    box-shadow: 0 0 35px rgba(212, 168, 67, 0.5), 0 0 60px rgba(212, 168, 67, 0.2);
   }
   100% {
-    box-shadow: 0 0 20px rgba(26, 60, 230, 0.3), 0 0 40px rgba(26, 60, 230, 0.1);
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.3), 0 0 40px rgba(212, 168, 67, 0.1);
   }
 }
 
@@ -162,4 +162,38 @@ body {
 
 .portal-rotate {
   animation: portal-rotate 12s linear infinite;
+}
+
+/* Orb drift animations — BackgroundEffects floating gradient orbs */
+@keyframes orb-drift-1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(60px, -40px) scale(1.05); }
+  66%  { transform: translate(-30px, 50px) scale(0.97); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orb-drift-2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  25%  { transform: translate(-70px, 30px) scale(1.04); }
+  75%  { transform: translate(40px, -60px) scale(0.96); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orb-drift-3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(50px, 70px) scale(1.06); }
+  80%  { transform: translate(-50px, -20px) scale(0.98); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orb-drift-4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(-40px, -50px) scale(1.03); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-1, .orb-2, .orb-3, .orb-4 {
+    animation: none !important;
+  }
 }

@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ContractAddressBar } from "@/components/ui/ContractAddressBar";
 import { BuyButton } from "@/components/ui/BuyButton";
 import RomanNumeral from "@/components/svg/RomanNumeral";
-import ConnectingLine from "@/components/svg/ConnectingLine";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 interface Step {
@@ -13,6 +13,7 @@ interface Step {
   title: string;
   body: string;
   delay: number;
+  imagePlaceholderDesc: string;
 }
 
 const STEPS: Step[] = [
@@ -21,18 +22,21 @@ const STEPS: Step[] = [
     title: "Get a Wallet",
     body: "Download Phantom or Solflare. Fund it with SOL from any exchange.",
     delay: 0,
+    imagePlaceholderDesc: "Pepe holding a Phantom wallet, looking confident",
   },
   {
     numeral: 2,
     title: "Copy the Contract",
     body: "Tap the address above — or the one below. Paste it into Jupiter or Pump.fun.",
     delay: 0.15,
+    imagePlaceholderDesc: "Pepe carefully copying text with a quill pen, ancient manuscript style",
   },
   {
     numeral: 3,
     title: "Swap for $PIDAY",
     body: "Set slippage to 3–5%. Confirm the swap. Welcome to the circle.",
     delay: 0.3,
+    imagePlaceholderDesc: "Pepe celebrating with pi symbols raining down",
   },
 ];
 
@@ -55,8 +59,24 @@ function StepCard({ step, index }: { step: Step; index: number }) {
         textAlign: "center",
         gap: "1rem",
         position: "relative",
+        background: "rgba(15, 22, 41, 0.6)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(212, 168, 67, 0.15)",
+        borderTop: "2px solid rgba(212, 168, 67, 0.4)",
+        borderRadius: "1rem",
       }}
     >
+      {/* Image placeholder above numeral */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <ImagePlaceholder
+          width={60}
+          height={60}
+          description={step.imagePlaceholderDesc}
+          rounded
+        />
+      </div>
+
       {/* Step label (I. Prepare, etc.) */}
       <span
         style={{
@@ -114,7 +134,7 @@ export function HowToBuy() {
       style={{
         padding: "6rem 0 8rem",
         position: "relative",
-        background: "var(--color-bg)",
+        background: "var(--color-surface)",
       }}
     >
       <div
@@ -138,49 +158,31 @@ export function HowToBuy() {
           <SectionHeader>Join the Circle</SectionHeader>
         </motion.div>
 
-        {/* Connecting line + Step cards */}
-        <div style={{ width: "100%", position: "relative" }}>
-          {/* Horizontal connecting line — desktop only, centered vertically in step area */}
+        {/* Step cards — with horizontal connector line on desktop */}
+        <div
+          style={{ width: "100%", position: "relative" }}
+          data-section="how-to-buy"
+        >
+          {/* Horizontal connecting line spanning between cards — desktop only */}
           <div
-            className="hidden md:flex"
+            className="hidden md:block"
+            aria-hidden="true"
             style={{
               position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              top: "calc(2rem + 30px)", // aligns with center of the image placeholder row
+              left: "calc(33.333% - 0px)",
+              right: "calc(33.333% - 0px)",
+              height: "1px",
+              background: "linear-gradient(90deg, transparent 0%, rgba(212,168,67,0.5) 20%, rgba(212,168,67,0.5) 80%, transparent 100%)",
               pointerEvents: "none",
               zIndex: 0,
-              width: "60%",
-              justifyContent: "center",
             }}
-            aria-hidden="true"
-          >
-            <ConnectingLine orientation="horizontal" />
-          </div>
-
-          {/* Vertical connecting line — mobile only */}
-          <div
-            className="flex md:hidden"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              pointerEvents: "none",
-              zIndex: 0,
-              height: "60%",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-            aria-hidden="true"
-          >
-            <ConnectingLine orientation="vertical" />
-          </div>
+          />
 
           {/* Steps — flex row desktop, col mobile */}
           <div
             className="flex flex-col md:flex-row"
-            style={{ position: "relative", zIndex: 1, gap: "0" }}
+            style={{ position: "relative", zIndex: 1, gap: "1.5rem" }}
           >
             {STEPS.map((step, i) => (
               <StepCard key={step.title} step={step} index={i} />

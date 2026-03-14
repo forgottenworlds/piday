@@ -27,8 +27,8 @@ export function BuyButton({
           padding: 0.875rem 2.5rem;
           border-radius: 9999px;
           border: none;
-          background: radial-gradient(ellipse at 50% 40%, #2a50f0 0%, #1A3CE6 60%, #1430c4 100%);
-          color: #ffffff;
+          background: radial-gradient(ellipse at 50% 40%, #e8bf5a 0%, #D4A843 60%, #b88c2e 100%);
+          color: #0A0E1A;
           font-family: var(--font-space-grotesk), sans-serif;
           font-size: 1.125rem;
           font-weight: 700;
@@ -52,7 +52,7 @@ export function BuyButton({
         }
 
         .buy-button:hover {
-          background: radial-gradient(ellipse at 50% 35%, #3d62f5 0%, #2248ee 50%, #1A3CE6 100%);
+          background: radial-gradient(ellipse at 50% 35%, #f0cc6a 0%, #ddb84f 50%, #D4A843 100%);
         }
 
         .buy-button:hover::after {

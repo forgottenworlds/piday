@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import DigitBorder from "@/components/svg/DigitBorder";
 import { XIcon, TelegramIcon } from "@/components/ui/SocialIcon";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 const INITIAL_DEGEN_COUNT = 3141;
@@ -16,6 +17,7 @@ function GatewayCard({
   body,
   ctaLabel,
   delay,
+  imagePlaceholderDesc,
 }: {
   href: string;
   icon: React.ReactNode;
@@ -23,6 +25,7 @@ function GatewayCard({
   body: React.ReactNode;
   ctaLabel: string;
   delay: number;
+  imagePlaceholderDesc: string;
 }) {
   return (
     <motion.div
@@ -41,7 +44,7 @@ function GatewayCard({
           display: "block",
           textDecoration: "none",
           position: "relative",
-          borderRadius: "4px",
+          borderRadius: "1rem",
           overflow: "hidden",
         }}
       >
@@ -70,11 +73,23 @@ function GatewayCard({
             padding: "3rem 2rem",
             minHeight: "350px",
             textAlign: "center",
-            background: "rgba(15, 22, 41, 0.6)",
-            transition: "background 0.3s ease",
+            background: "rgba(15, 22, 41, 0.7)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(212, 168, 67, 0.15)",
+            borderRadius: "1rem",
+            transition: "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
           }}
           className="gateway-inner"
         >
+          {/* Image placeholder */}
+          <ImagePlaceholder
+            width={100}
+            height={100}
+            description={imagePlaceholderDesc}
+            rounded
+          />
+
           {/* Icon */}
           <div
             style={{
@@ -147,7 +162,9 @@ export function Community() {
           transition: background 0.3s ease;
         }
         .gateway-card:hover .gateway-inner {
-          background: rgba(20, 27, 50, 0.8);
+          background: rgba(22, 30, 56, 0.85);
+          border-color: rgba(212, 168, 67, 0.4);
+          box-shadow: 0 0 24px rgba(212, 168, 67, 0.12), 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         .gateway-cta {
           display: inline-flex;
@@ -216,6 +233,7 @@ export function Community() {
             heading="Follow @PiDayCoin"
             body="Get memes. Get alpha. Get irrational."
             ctaLabel="Enter"
+            imagePlaceholderDesc="Pepe in William Jones attire, tweeting from a scroll"
           />
           </div>
 
@@ -322,6 +340,7 @@ export function Community() {
               </>
             }
             ctaLabel="Enter"
+            imagePlaceholderDesc="Group of Pepes in a mathematical circle/gathering"
           />
           </div>
         </div>

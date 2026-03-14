@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import GoldenSpiral from "@/components/svg/GoldenSpiral";
 import PiSpiralCanvas from "@/components/canvas/PiSpiralCanvas";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
 const PARA_VARIANTS = {
   hidden: { opacity: 0, y: 20 },
@@ -24,15 +25,6 @@ export default function Story() {
         background: "var(--color-bg)",
       }}
     >
-      {/* Background Pi spiral canvas — desktop */}
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] hidden md:block"
-        style={{ opacity: 0.06, pointerEvents: "none" }}
-        aria-hidden="true"
-      >
-        <PiSpiralCanvas opacity={0.06} />
-      </div>
-
       {/* Background Pi spiral canvas — mobile */}
       <div
         className="absolute inset-0 w-full h-full block md:hidden"
@@ -48,13 +40,17 @@ export default function Story() {
           margin: "0 auto",
           padding: "0 2rem",
           position: "relative",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "4rem",
         }}
       >
+        {/* Text column */}
         <div
           style={{
-            maxWidth: "680px",
-            marginLeft: 0,
-            marginRight: "auto",
+            flex: "1 1 0",
+            minWidth: 0,
             position: "relative",
           }}
         >
@@ -180,6 +176,27 @@ export default function Story() {
             <span className="gold-flare-target">the coin that never dies</span>.
           </motion.p>
         </div>
+
+        {/* Image placeholder column — desktop only */}
+        <motion.div
+          className="hidden md:flex"
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          style={{
+            flexShrink: 0,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ImagePlaceholder
+            width={300}
+            height={300}
+            description="Pepe as William Jones at a chalkboard, writing Pi digits. Dark academia aesthetic, mathematical instruments around him."
+          />
+        </motion.div>
       </div>
     </section>
   );

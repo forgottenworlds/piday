@@ -51,6 +51,12 @@ function StatCard({ stat }: { stat: StatItem }) {
         alignItems: "center",
         flex: "1 1 200px",
         minWidth: 0,
+        background: "rgba(15, 22, 41, 0.6)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(212, 168, 67, 0.15)",
+        borderRadius: "1rem",
+        padding: "2rem",
       }}
     >
       {/* Shape with text overlay */}
@@ -116,7 +122,7 @@ export default function Tokenomics() {
         padding: "6rem 0 8rem",
         position: "relative",
         overflow: "hidden",
-        background: "var(--color-bg)",
+        background: "var(--color-surface)",
       }}
     >
       {/* Ambient construction lines */}

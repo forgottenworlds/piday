@@ -13,6 +13,7 @@ import {
   DexScreenerIcon,
 } from "@/components/ui/SocialIcon";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
@@ -201,6 +202,28 @@ export default function Hero() {
             >
               The only coin with a built-in global holiday. Born on Pi Day 2026.
             </motion.p>
+
+            {/* Character image placeholders */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 1.3 }}
+              style={{ display: "flex", gap: "0.75rem", alignItems: "center", justifyContent: "center" }}
+            >
+              {[
+                "Pepe as William Jones — confident pose, pi symbol on coat",
+                "Pepe as William Jones — curious expression, holding compass",
+                "Pepe as William Jones — triumphant pose, pi digits floating",
+              ].map((desc, i) => (
+                <ImagePlaceholder
+                  key={i}
+                  width={80}
+                  height={80}
+                  description={desc}
+                  rounded
+                />
+              ))}
+            </motion.div>
 
             {/* Contract address */}
             <motion.div
