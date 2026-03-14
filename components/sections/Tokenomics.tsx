@@ -53,6 +53,7 @@ function StatCard({ stat }: { stat: StatItem }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        gap: "0",
         flex: "1 1 200px",
         minWidth: 0,
         background: "rgba(15, 22, 41, 0.6)",
@@ -60,11 +61,11 @@ function StatCard({ stat }: { stat: StatItem }) {
         WebkitBackdropFilter: "blur(12px)",
         border: "1px solid rgba(212, 168, 67, 0.15)",
         borderRadius: "1rem",
-        padding: "2rem",
+        padding: "1.5rem 2rem",
       }}
     >
       {/* Emoji icon */}
-      <span style={{ fontSize: "2.5rem", lineHeight: 1, marginBottom: "0.25rem" }} aria-hidden="true">
+      <span style={{ fontSize: "3.5rem", lineHeight: 1, marginBottom: "0" }} aria-hidden="true">
         {stat.emoji}
       </span>
 
