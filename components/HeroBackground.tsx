@@ -1,11 +1,98 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { PI_DIGITS } from "@/lib/pi-digits";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+
 /**
- * HeroBackground — animated dot grid + pulsing radial glows.
+ * HeroBackground — Matrix-style raining Pi digits + dot grid + pulsing radial glows.
  * Renders as absolute-inset, z-index 0, pointer-events none.
- * Intended as the first child of the Hero <section>.
  */
 export default function HeroBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || reducedMotion) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    let columns: number[] = [];
+    let colCount = 0;
+
+    const FONT_SIZE = 16;
+    const CHAR_OPACITY_MAX = 0.4;
+    const FADE_SPEED = 0.06;
+    const DROP_SPEED = 0.6; // cells per frame
+
+    function resize() {
+      canvas!.width = canvas!.offsetWidth;
+      canvas!.height = canvas!.offsetHeight;
+      colCount = Math.ceil(canvas!.width / FONT_SIZE);
+      // Preserve existing columns, add new ones if wider
+      while (columns.length < colCount) {
+        columns.push(Math.random() * -50); // stagger start positions
+      }
+      columns.length = colCount;
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    function draw() {
+      // Semi-transparent black fill to create trail fade effect
+      ctx!.fillStyle = `rgba(10, 14, 26, ${FADE_SPEED})`;
+      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
+
+      ctx!.font = `500 ${FONT_SIZE}px "JetBrains Mono", monospace`;
+      ctx!.textAlign = "center";
+
+      for (let i = 0; i < colCount; i++) {
+        const y = columns[i] * FONT_SIZE;
+
+        // Pick a Pi digit based on column + row position
+        const charIndex = Math.abs(Math.floor(columns[i] * 7 + i * 13)) % PI_DIGITS.length;
+        const char = PI_DIGITS[charIndex];
+
+        // Head of the stream is brighter gold, trail fades to green-gold
+        const headY = y;
+        if (headY > 0 && headY < canvas!.height) {
+          // Bright head character
+          ctx!.fillStyle = `rgba(212, 168, 67, ${CHAR_OPACITY_MAX})`;
+          ctx!.fillText(char, i * FONT_SIZE + FONT_SIZE / 2, headY);
+
+          // Slightly brighter leading char
+          ctx!.fillStyle = `rgba(232, 198, 107, ${CHAR_OPACITY_MAX + 0.15})`;
+          ctx!.fillText(char, i * FONT_SIZE + FONT_SIZE / 2, headY);
+        }
+
+        // Advance the drop
+        columns[i] += DROP_SPEED + Math.random() * 0.2;
+
+        // Reset when off screen, with random delay
+        if (columns[i] * FONT_SIZE > canvas!.height && Math.random() > 0.98) {
+          columns[i] = Math.random() * -20;
+        }
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    // Initial clear
+    ctx.fillStyle = "rgba(10, 14, 26, 1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    animId = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, [reducedMotion]);
+
   return (
     <div
       aria-hidden="true"
@@ -17,13 +104,25 @@ export default function HeroBackground() {
         overflow: "hidden",
       }}
     >
-      {/* Dot grid layer */}
+      {/* Matrix rain canvas */}
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.7,
+        }}
+      />
+
+      {/* Dot grid layer — on top of rain for texture */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "radial-gradient(circle, rgba(212,168,67,0.08) 1px, transparent 1px)",
+            "radial-gradient(circle, rgba(212,168,67,0.06) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
@@ -40,13 +139,13 @@ export default function HeroBackground() {
           marginTop: "-300px",
           marginLeft: "-300px",
           background:
-            "radial-gradient(circle at center, rgba(212,168,67,0.06) 0%, rgba(212,168,67,0.02) 50%, transparent 75%)",
+            "radial-gradient(circle at center, rgba(212,168,67,0.08) 0%, rgba(212,168,67,0.02) 50%, transparent 75%)",
           borderRadius: "9999px",
           filter: "blur(20px)",
         }}
       />
 
-      {/* Secondary cyan glow — offset top-right, slower + fainter */}
+      {/* Secondary cyan glow — offset top-right */}
       <div
         className="hero-glow-cyan"
         style={{
