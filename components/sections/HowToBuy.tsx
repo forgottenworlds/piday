@@ -1,48 +1,41 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Wallet, ClipboardCopy, ArrowRightLeft } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ContractAddressBar } from "@/components/ui/ContractAddressBar";
 import { BuyButton } from "@/components/ui/BuyButton";
-import RomanNumeral from "@/components/svg/RomanNumeral";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 interface Step {
-  numeral: 1 | 2 | 3;
+  icon: React.ReactNode;
   title: string;
   body: string;
   delay: number;
-  imagePlaceholderDesc: string;
 }
 
 const STEPS: Step[] = [
   {
-    numeral: 1,
+    icon: <Wallet size={40} strokeWidth={1.5} />,
     title: "Get a Wallet",
     body: "Download Phantom or Solflare. Fund it with SOL from any exchange.",
     delay: 0,
-    imagePlaceholderDesc: "Phantom or Solflare wallet app icon — clean flat design, gold/dark tones, wallet with SOL logo visible",
   },
   {
-    numeral: 2,
+    icon: <ClipboardCopy size={40} strokeWidth={1.5} />,
     title: "Copy the Contract",
     body: "Tap the address above — or the one below. Paste it into Jupiter or Pump.fun.",
     delay: 0.15,
-    imagePlaceholderDesc: "Contract address being copied — clipboard icon with a gold pi symbol, showing paste action into a swap interface",
   },
   {
-    numeral: 3,
+    icon: <ArrowRightLeft size={40} strokeWidth={1.5} />,
     title: "Swap for $PIDAY",
     body: "Set slippage to 3–5%. Confirm the swap. Welcome to the circle.",
     delay: 0.3,
-    imagePlaceholderDesc: "Swap confirmation screen — SOL arrow pointing to $PIDAY coin, green checkmark, celebration confetti with pi symbols",
   },
 ];
 
-const STEP_LABELS = ["I. Prepare", "II. Inscribe", "III. Enter"];
-
-function StepCard({ step, index }: { step: Step; index: number }) {
+function StepCard({ step }: { step: Step }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -57,7 +50,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
         minWidth: 0,
         padding: "2rem 1.5rem",
         textAlign: "center",
-        gap: "1rem",
+        gap: "0.5rem",
         position: "relative",
         background: "rgba(15, 22, 41, 0.6)",
         backdropFilter: "blur(12px)",
@@ -67,32 +60,9 @@ function StepCard({ step, index }: { step: Step; index: number }) {
         borderRadius: "1rem",
       }}
     >
-      {/* Instructional image placeholder */}
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <ImagePlaceholder
-          width={180}
-          height={120}
-          description={step.imagePlaceholderDesc}
-        />
-      </div>
-
-      {/* Step label (I. Prepare, etc.) */}
-      <span
-        style={{
-          fontFamily: "var(--font-jetbrains-mono), monospace",
-          fontSize: "11px",
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "var(--color-muted)",
-          display: "block",
-        }}
-      >
-        {STEP_LABELS[index]}
-      </span>
-
-      {/* Roman numeral */}
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <RomanNumeral numeral={step.numeral} />
+      {/* Lucide icon */}
+      <div style={{ color: "var(--color-gold)", marginBottom: "0.25rem" }}>
+        {step.icon}
       </div>
 
       {/* Title */}
@@ -157,34 +127,14 @@ export function HowToBuy() {
           <SectionHeader>Join the Circle</SectionHeader>
         </motion.div>
 
-        {/* Step cards — with horizontal connector line on desktop */}
-        <div
-          style={{ width: "100%", position: "relative" }}
-          data-section="how-to-buy"
-        >
-          {/* Horizontal connecting line spanning between cards — desktop only */}
-          <div
-            className="hidden md:block"
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              top: "calc(2rem + 30px)", // aligns with center of the image placeholder row
-              left: "calc(33.333% - 0px)",
-              right: "calc(33.333% - 0px)",
-              height: "1px",
-              background: "linear-gradient(90deg, transparent 0%, rgba(212,168,67,0.5) 20%, rgba(212,168,67,0.5) 80%, transparent 100%)",
-              pointerEvents: "none",
-              zIndex: 0,
-            }}
-          />
-
-          {/* Steps — flex row desktop, col mobile */}
+        {/* Step cards */}
+        <div style={{ width: "100%", position: "relative" }}>
           <div
             className="flex flex-col md:flex-row"
             style={{ position: "relative", zIndex: 1, gap: "1.5rem" }}
           >
-            {STEPS.map((step, i) => (
-              <StepCard key={step.title} step={step} index={i} />
+            {STEPS.map((step) => (
+              <StepCard key={step.title} step={step} />
             ))}
           </div>
         </div>
@@ -197,7 +147,6 @@ export function HowToBuy() {
           transition={{ duration: 0.5, delay: 0.2 }}
           style={{ width: "100%" }}
         >
-          {/* Gold hr divider */}
           <div
             aria-hidden="true"
             style={{
@@ -208,8 +157,6 @@ export function HowToBuy() {
               width: "100%",
             }}
           />
-
-          {/* Address + Buy side by side desktop, stacked mobile */}
           <div
             className="flex flex-col md:flex-row"
             style={{

@@ -5,74 +5,9 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import GeometricShape from "@/components/svg/GeometricShape";
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
-/** Inline SVG icon: Pi symbol — represents the total supply derived from π */
-function PiSymbolIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <path
-        d="M8 12h20M14 12v16M22 12c0 0 0 10-1 14s-3 4-4 3"
-        stroke="var(--color-gold)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-/** Inline SVG icon: Flame — represents the burn mechanism */
-function FlameIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <path
-        d="M18 4c0 0-8 8-8 16a8 8 0 0 0 16 0c0-4-2-7-4-9 0 0 1 4-1 6-1 1-3 1-3-1 0-3 4-7 0-12z"
-        stroke="var(--color-gold)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M18 28a3 3 0 0 0 3-3c0-2-3-5-3-5s-3 3-3 5a3 3 0 0 0 3 3z"
-        stroke="var(--color-gold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.7"
-      />
-    </svg>
-  );
-}
-
-/** Inline SVG icon: Shield with lock — represents LP lock security */
-function ShieldLockIcon() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <path
-        d="M18 3L5 9v8c0 8.5 5.5 16.5 13 19 7.5-2.5 13-10.5 13-19V9L18 3z"
-        stroke="var(--color-gold)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect
-        x="14" y="15" width="8" height="7" rx="1.5"
-        stroke="var(--color-gold)"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M15.5 15v-2a2.5 2.5 0 0 1 5 0v2"
-        stroke="var(--color-gold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="18" cy="18.5" r="1" fill="var(--color-gold)" />
-    </svg>
-  );
-}
-
 interface StatItem {
   shape: "circle" | "triangle" | "hexagon";
-  icon: React.ReactNode;
+  emoji: string;
   value: string;
   label: string;
   subLabel: string;
@@ -82,7 +17,7 @@ interface StatItem {
 const STATS: StatItem[] = [
   {
     shape: "circle",
-    icon: <PiSymbolIcon />,
+    emoji: "🥧",
     value: PLACEHOLDERS.tokenomics.totalSupply,
     label: "Total Supply",
     subLabel: "Based on the digits of π",
@@ -90,7 +25,7 @@ const STATS: StatItem[] = [
   },
   {
     shape: "triangle",
-    icon: <FlameIcon />,
+    emoji: "🔥",
     value: PLACEHOLDERS.tokenomics.burnRate,
     label: "Burn Rate",
     subLabel: "Per transaction, forever",
@@ -98,7 +33,7 @@ const STATS: StatItem[] = [
   },
   {
     shape: "hexagon",
-    icon: <ShieldLockIcon />,
+    emoji: "🔒",
     value: PLACEHOLDERS.tokenomics.lpLock,
     label: "LP Lock",
     subLabel: "Verified on-chain",
@@ -128,10 +63,10 @@ function StatCard({ stat }: { stat: StatItem }) {
         padding: "2rem",
       }}
     >
-      {/* Icon above shape */}
-      <div style={{ marginBottom: "0.5rem", opacity: 0.9 }}>
-        {stat.icon}
-      </div>
+      {/* Emoji icon */}
+      <span style={{ fontSize: "2.5rem", lineHeight: 1, marginBottom: "0.25rem" }} aria-hidden="true">
+        {stat.emoji}
+      </span>
 
       {/* Shape with text overlay */}
       <div style={{ position: "relative", width: 200, height: 200 }}>
