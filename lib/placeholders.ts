@@ -1,6 +1,6 @@
 export const PLACEHOLDERS = {
-  contractAddress: "Coming Soon",
-  buyUrl: "#",
+  contractAddress: "DdJHXiAEfVDjuEQENtxyYPhEfdgBH8LbXTUN3XnYpump",
+  buyUrl: "https://pump.fun/coin/DdJHXiAEfVDjuEQENtxyYPhEfdgBH8LbXTUN3XnYpump",
   xHandle: "@pidayonline",
   xUrl: "https://x.com/pidayonline",
   telegramUrl: "https://t.me/+QGPtIX4rkAEyNDBl",
