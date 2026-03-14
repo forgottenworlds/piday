@@ -4,109 +4,101 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import SectionBackground from "@/components/SectionBackground";
 
-import { PLACEHOLDERS } from "@/lib/placeholders";
-
-interface StatItem {
+interface Feature {
   emoji: string;
-  value: string;
-  label: string;
-  subLabel: string;
+  title: string;
+  description: string;
   delay: number;
 }
 
-const STATS: StatItem[] = [
+const FEATURES: Feature[] = [
   {
-
-    emoji: "🥧",
-    value: PLACEHOLDERS.tokenomics.totalSupply,
-    label: "Total Supply",
-    subLabel: "Based on the digits of π",
+    emoji: "📅",
+    title: "Built-In Holiday",
+    description:
+      "Every March 14, the entire internet celebrates Pi Day. No other coin has an annual global catalyst baked into the calendar.",
     delay: 0,
   },
   {
-
-    emoji: "🔥",
-    value: PLACEHOLDERS.tokenomics.burnRate,
-    label: "Burn Rate",
-    subLabel: "Per transaction, forever",
+    emoji: "🤝",
+    title: "100% Fair Launch",
+    description:
+      "Launched on Pump.fun. No presale. No team tokens. No insiders. Everyone starts equal.",
+    delay: 0.15,
+  },
+  {
+    emoji: "🔄",
+    title: "Annual Catalyst",
+    description:
+      "Every year on March 14, $PIDAY re-enters the conversation. The meme renews itself. Forever.",
     delay: 0.3,
   },
   {
-
-    emoji: "🔒",
-    value: PLACEHOLDERS.tokenomics.lpLock,
-    label: "LP Lock",
-    subLabel: "Verified on-chain",
-    delay: 0.6,
+    emoji: "♾️",
+    title: "Infinite & Irrational",
+    description:
+      "Pi never ends and never repeats. Sound like any chart you know? The number that never ends, on the coin that never dies.",
+    delay: 0.45,
   },
 ];
 
-function StatCard({ stat }: { stat: StatItem }) {
+function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <motion.div
       data-animate
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: stat.delay, ease: [0.4, 0, 0.2, 1] }}
+      transition={{
+        duration: 0.6,
+        delay: feature.delay,
+        ease: [0.4, 0, 0.2, 1],
+      }}
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "0.5rem",
-        flex: "1 1 200px",
+        gap: "0.75rem",
+        flex: "1 1 240px",
         minWidth: 0,
         background: "rgba(15, 22, 41, 0.6)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         border: "1px solid rgba(212, 168, 67, 0.15)",
         borderRadius: "1rem",
-        padding: "2rem",
+        padding: "2rem 1.5rem",
+        textAlign: "center",
       }}
     >
-      {/* Emoji icon */}
-      <span style={{ fontSize: "3.5rem", lineHeight: 1 }} aria-hidden="true">
-        {stat.emoji}
+      <span style={{ fontSize: "3rem", lineHeight: 1 }} aria-hidden="true">
+        {feature.emoji}
       </span>
 
-      {/* Value */}
-      <span
+      <h3
         style={{
-          fontFamily: "var(--font-jetbrains-mono), monospace",
-          fontSize: "1.5rem",
-          fontWeight: 700,
-          color: "var(--color-gold)",
-          textAlign: "center",
-          lineHeight: 1.2,
+          fontFamily: "var(--font-space-grotesk), sans-serif",
+          fontWeight: 600,
+          fontSize: "1.25rem",
+          color: "var(--color-text)",
+          margin: 0,
+          lineHeight: 1.3,
         }}
       >
-        {stat.value}
-      </span>
+        {feature.title}
+      </h3>
 
-      {/* Label */}
-      <span
+      <p
         style={{
           fontFamily: "var(--font-inter), sans-serif",
-          fontSize: "0.875rem",
+          fontSize: "0.9375rem",
           color: "var(--color-muted)",
-          textAlign: "center",
+          margin: 0,
+          lineHeight: 1.65,
+          maxWidth: "280px",
         }}
       >
-        {stat.label}
-      </span>
-
-      {/* Sub-label */}
-      <span
-        style={{
-          fontFamily: "var(--font-inter), sans-serif",
-          fontSize: "0.75rem",
-          color: "var(--color-muted)",
-          textAlign: "center",
-          opacity: 0.7,
-        }}
-      >
-        {stat.subLabel}
-      </span>
+        {feature.description}
+      </p>
     </motion.div>
   );
 }
@@ -124,82 +116,37 @@ export default function Tokenomics() {
     >
       <SectionBackground color="gold" />
 
-      {/* Ambient construction lines */}
-      <svg
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-        }}
-      >
-        <line
-          x1="0"
-          y1="30%"
-          x2="100%"
-          y2="70%"
-          stroke="var(--color-gold)"
-          strokeWidth="1"
-          opacity="0.05"
-        />
-        <line
-          x1="100%"
-          y1="30%"
-          x2="0"
-          y2="70%"
-          stroke="var(--color-gold)"
-          strokeWidth="1"
-          opacity="0.05"
-        />
-        <line
-          x1="50%"
-          y1="0"
-          x2="50%"
-          y2="100%"
-          stroke="var(--color-gold)"
-          strokeWidth="1"
-          opacity="0.03"
-        />
-      </svg>
-
       <div
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "0 1rem",
+          padding: "0 1.5rem",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: "4rem",
         }}
       >
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
         >
-          <SectionHeader>
-            The Numbers Don&apos;t Lie. They&apos;re Irrational.
-          </SectionHeader>
+          <SectionHeader>Why $PIDAY?</SectionHeader>
         </motion.div>
 
-        {/* Stats row */}
+        {/* Feature cards — 2x2 grid on desktop, single column mobile */}
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "3rem",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "1.5rem",
             width: "100%",
           }}
         >
-          {STATS.map((stat) => (
-            <StatCard key={stat.label} stat={stat} />
+          {FEATURES.map((feature) => (
+            <FeatureCard key={feature.title} feature={feature} />
           ))}
         </div>
 
@@ -212,18 +159,19 @@ export default function Tokenomics() {
           transition={{ duration: 0.5, delay: 0.3 }}
           style={{
             fontFamily: "var(--font-inter), sans-serif",
-            fontSize: "1rem",
+            fontSize: "1.125rem",
             color: "var(--color-muted)",
             textAlign: "center",
             margin: 0,
-            letterSpacing: "0.01em",
+            maxWidth: "600px",
+            lineHeight: 1.7,
           }}
         >
-          No team tokens{" "}
-          <span style={{ color: "var(--color-gold)" }}>·</span> No presale{" "}
-          <span style={{ color: "var(--color-gold)" }}>·</span> No insider
-          allocation{" "}
-          <span style={{ color: "var(--color-gold)" }}>·</span> 100% fair launch.
+          Launched on Pi Day 2026 on{" "}
+          <span style={{ color: "var(--color-gold)", fontWeight: 600 }}>
+            Pump.fun
+          </span>
+          . The only coin with a built-in global holiday.
         </motion.p>
       </div>
     </section>
