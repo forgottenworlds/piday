@@ -22,21 +22,21 @@ const STEPS: Step[] = [
     title: "Get a Wallet",
     body: "Download Phantom or Solflare. Fund it with SOL from any exchange.",
     delay: 0,
-    imagePlaceholderDesc: "Pepe holding a Phantom wallet, looking confident",
+    imagePlaceholderDesc: "Phantom or Solflare wallet app icon — clean flat design, gold/dark tones, wallet with SOL logo visible",
   },
   {
     numeral: 2,
     title: "Copy the Contract",
     body: "Tap the address above — or the one below. Paste it into Jupiter or Pump.fun.",
     delay: 0.15,
-    imagePlaceholderDesc: "Pepe carefully copying text with a quill pen, ancient manuscript style",
+    imagePlaceholderDesc: "Contract address being copied — clipboard icon with a gold pi symbol, showing paste action into a swap interface",
   },
   {
     numeral: 3,
     title: "Swap for $PIDAY",
     body: "Set slippage to 3–5%. Confirm the swap. Welcome to the circle.",
     delay: 0.3,
-    imagePlaceholderDesc: "Pepe celebrating with pi symbols raining down",
+    imagePlaceholderDesc: "Swap confirmation screen — SOL arrow pointing to $PIDAY coin, green checkmark, celebration confetti with pi symbols",
   },
 ];
 
@@ -67,13 +67,12 @@ function StepCard({ step, index }: { step: Step; index: number }) {
         borderRadius: "1rem",
       }}
     >
-      {/* Image placeholder above numeral */}
+      {/* Instructional image placeholder */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <ImagePlaceholder
-          width={60}
-          height={60}
+          width={180}
+          height={120}
           description={step.imagePlaceholderDesc}
-          rounded
         />
       </div>
 

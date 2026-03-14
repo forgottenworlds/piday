@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import DigitBorder from "@/components/svg/DigitBorder";
 import { XIcon, TelegramIcon } from "@/components/ui/SocialIcon";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+
 import { PLACEHOLDERS } from "@/lib/placeholders";
 
 const INITIAL_DEGEN_COUNT = 3141;
@@ -17,7 +17,6 @@ function GatewayCard({
   body,
   ctaLabel,
   delay,
-  imagePlaceholderDesc,
 }: {
   href: string;
   icon: React.ReactNode;
@@ -25,7 +24,6 @@ function GatewayCard({
   body: React.ReactNode;
   ctaLabel: string;
   delay: number;
-  imagePlaceholderDesc: string;
 }) {
   return (
     <motion.div
@@ -82,14 +80,6 @@ function GatewayCard({
           }}
           className="gateway-inner"
         >
-          {/* Image placeholder */}
-          <ImagePlaceholder
-            width={100}
-            height={100}
-            description={imagePlaceholderDesc}
-            rounded
-          />
-
           {/* Icon */}
           <div
             style={{
@@ -233,7 +223,6 @@ export function Community() {
             heading="Follow @PiDayCoin"
             body="Get memes. Get alpha. Get irrational."
             ctaLabel="Enter"
-            imagePlaceholderDesc="Pepe in William Jones attire, tweeting from a scroll"
           />
           </div>
 
@@ -340,7 +329,6 @@ export function Community() {
               </>
             }
             ctaLabel="Enter"
-            imagePlaceholderDesc="Group of Pepes in a mathematical circle/gathering"
           />
           </div>
         </div>
