@@ -28,7 +28,21 @@ export function useCopyToClipboard(): UseCopyToClipboardReturn {
       await navigator.clipboard.writeText(text);
       setStatus("copied");
     } catch {
-      setStatus("failed");
+      // Fallback: hidden textarea + execCommand
+      try {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setStatus("copied");
+      } catch {
+        setStatus("failed");
+      }
     }
 
     // Reset to idle after 2300ms

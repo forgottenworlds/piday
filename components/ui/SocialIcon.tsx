@@ -37,7 +37,7 @@ export function SocialIcon({ href, label, children }: SocialIconProps) {
 
         .social-icon-link:hover svg {
           stroke: #ffffff;
-          fill: #ffffff;
+          fill: none;
         }
 
         .social-icon-link:focus-visible {

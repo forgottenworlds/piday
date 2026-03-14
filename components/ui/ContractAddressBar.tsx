@@ -23,38 +23,32 @@ export function ContractAddressBar({
 
   return (
     <>
+      <style>{`
+        .ca-bar {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid var(--color-gold);
+          border-radius: 9999px;
+          padding: 0.5rem 1.25rem;
+          background-color: transparent;
+          cursor: pointer;
+          transition: border-color 0.2s ease, background-color 0.2s ease;
+          font-family: var(--font-jetbrains-mono), monospace;
+          font-size: 14px;
+          color: var(--color-text);
+          letter-spacing: 0.02em;
+        }
+        .ca-bar:hover {
+          border-color: rgba(212, 168, 67, 0.8);
+          background-color: rgba(212, 168, 67, 0.05);
+        }
+      `}</style>
       <button
         onClick={() => copy(address)}
         aria-label={`Copy contract address: ${address}`}
         title="Click to copy contract address"
-        className={className}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          border: "1px solid var(--color-gold)",
-          borderRadius: "9999px",
-          padding: "0.5rem 1.25rem",
-          backgroundColor: "transparent",
-          cursor: "pointer",
-          transition: "border-color 0.2s ease, background-color 0.2s ease",
-          fontFamily: "var(--font-jetbrains-mono), monospace",
-          fontSize: "14px",
-          color: "var(--color-text)",
-          letterSpacing: "0.02em",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor =
-            "rgba(212, 168, 67, 0.8)";
-          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
-            "rgba(212, 168, 67, 0.05)";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.borderColor =
-            "var(--color-gold)";
-          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
-            "transparent";
-        }}
+        className={`ca-bar ${className}`}
       >
         {/* Copy icon */}
         <svg
