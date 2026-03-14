@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #0A0E1A;
+  --color-surface: #0F1629;
+  --color-primary: #1A3CE6;
+  --color-accent: #00D4FF;
+  --color-gold: #D4A843;
+  --color-text: #E8EDF5;
+  --color-muted: #6B7A99;
+  --color-success: #22C55E;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-gold: var(--color-gold);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-success: var(--color-success);
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  /* Intentionally overrides Tailwind's default --font-mono so that
+     the `font-mono` utility class produces JetBrains Mono */
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Focus states — keyboard only */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion — only affects CSS @keyframes animations.
+   GSAP scroll-driven animations are handled by useReducedMotion hook.
+   Do NOT add blanket transition-duration override here. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-scroll,
+  .plumb-bob,
+  .pulse-glow,
+  .live-pulse,
+  .portal-rotate {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   CSS @keyframes animations
+   ============================================================ */
+
+/* Ticker scroll — pi digit marquee scrolls left continuously */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Plumb bob — scroll indicator bobs gently */
+@keyframes plumb-bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.plumb-bob {
+  animation: plumb-bob 2s ease-in-out infinite;
+}
+
+/* Pulse glow — CTA button ambient glow pulse */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 20px rgba(26, 60, 230, 0.3), 0 0 40px rgba(26, 60, 230, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(26, 60, 230, 0.5), 0 0 60px rgba(26, 60, 230, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(26, 60, 230, 0.3), 0 0 40px rgba(26, 60, 230, 0.1);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Live pulse — live indicator dot opacity/scale pulse */
+@keyframes live-pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.live-pulse {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+/* Gold flare — text illumination from Ghost White to Pi Gold and back */
+@keyframes gold-flare {
+  0% {
+    color: var(--color-text);
+  }
+  40% {
+    color: var(--color-gold);
+  }
+  100% {
+    color: var(--color-text);
+  }
+}
+
+.gold-flare {
+  animation: gold-flare 1.8s ease-in-out forwards;
+}
+
+/* Portal rotate — digit ring rotation around DexScreener portal */
+@keyframes portal-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.portal-rotate {
+  animation: portal-rotate 12s linear infinite;
+}
