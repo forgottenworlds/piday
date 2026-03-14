@@ -23,7 +23,7 @@ export default function HeroBackground() {
     let columns: number[] = [];
     let colCount = 0;
 
-    const FONT_SIZE = 16;
+    const FONT_SIZE = 28;
     const CHAR_OPACITY_MAX = 0.08;
     const FADE_SPEED = 0.015;
     const DROP_SPEED = 0.06; // cells per frame
@@ -32,9 +32,10 @@ export default function HeroBackground() {
       canvas!.width = canvas!.offsetWidth;
       canvas!.height = canvas!.offsetHeight;
       colCount = Math.ceil(canvas!.width / FONT_SIZE);
-      // Preserve existing columns, add new ones if wider
+      // Preserve existing columns, add new ones — push many far off-screen
+      // so only ~30% of columns are active at any time (sparse look)
       while (columns.length < colCount) {
-        columns.push(Math.random() * -50); // stagger start positions
+        columns.push(Math.random() < 0.3 ? Math.random() * -30 : -999);
       }
       columns.length = colCount;
     }
@@ -72,9 +73,9 @@ export default function HeroBackground() {
         // Advance the drop
         columns[i] += DROP_SPEED + Math.random() * 0.2;
 
-        // Reset when off screen, with random delay
-        if (columns[i] * FONT_SIZE > canvas!.height && Math.random() > 0.98) {
-          columns[i] = Math.random() * -20;
+        // Reset when off screen — only 2% chance per frame, keeps it sparse
+        if (columns[i] * FONT_SIZE > canvas!.height && Math.random() > 0.995) {
+          columns[i] = Math.random() * -30;
         }
       }
 
